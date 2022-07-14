@@ -33,7 +33,8 @@ Was benötigt wird:
  - "format fs=FAT32 quick label=efi" Formatieren des EFI Datenträgers in FAT32
 Dies ist vorerst der letzte Schritt in DISKPART. Mit "exit" kann diskpart beendet werden.
 
-
+![diskpart1](https://raw.githubusercontent.com/it4impuls/multiboot-win-usb/main/01diskpart1.PNG)
+![diskpart2](https://raw.githubusercontent.com/it4impuls/multiboot-win-usb/main/02diskpart2.PNG)
 
 2. Windowsdateien auf die NTFS Datenträger kopieren
  - Mit Doppelklick auf die ISO des windowsinstallers die ISO als Virtuelles Laufwerk mounten.
@@ -43,18 +44,23 @@ Dies ist vorerst der letzte Schritt in DISKPART. Mit "exit" kann diskpart beende
 Es werden aller installations typen der ISO gelistet.
 Die Nummer bei "Index" von der Windows version die man haben möchte Merken
 
+![cmd1](https://raw.githubusercontent.com/it4impuls/multiboot-win-usb/main/03cmd1.PNG)
+
  - "dism /Apply-Image /ImageFile:X:\sources\install.wim /Index:5 /ApplyDir:Y:\"
 mit diesem befehl werden die Windows Daten auf das zuvor erstellte NTFS Laufwerk kopiert. X ist dabei das ISO Laufwerk, Y ist das Ziel NTFS Laufwerk des USB Sticks.
  - Dieser Vorgang kann eine Weile dauern. Nach ein paar Minuten Wartezeit erscheint ein Ladebalken 
  - Den befehl für die zweite Windows installation wiederholen. Y ist dann natürlich das zweite NTFS Laufwerk des USB-Sticks
 
-
+![cmd2](https://raw.githubusercontent.com/it4impuls/multiboot-win-usb/main/04cmd2.PNG)
 
 Nachdem die Dateien Kopiert wurden muss nun der Bootloader Konfiguriert werden.
  - In CMD:
 "Y:\Windows\System32\bcdboot Y:\Windows /f UEFI /s Z:"
 Wobei Y Die USB NTFS partion ist und Z die USB FAT32 partition (EFI) (Achtung 2 positionen für Y)
  - Diesen Befehl für die zweite USB NTFS partition wiederholen. Z bleibt die gleiche EFI Partition des USB STICKS nur Y ändert sich entsprechend der zweiten NTFS Partition
+ 
+ ![cmd3](https://raw.githubusercontent.com/it4impuls/multiboot-win-usb/main/05cmd3.PNG)
+ 
  - Nun benötigt man noch einmal DISKPART (in cmd DISKPART eingeben)
 
 
